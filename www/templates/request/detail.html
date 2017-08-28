@@ -1,0 +1,19 @@
+<ion-view view-title="{{request.user}} {{request.bloc}} {{request.apartment}}" ng-controller="RequestController" ng-init="findRequest()">
+	<ion-content>
+		<div class="card">
+			<div class="item item-text-wrap">
+				{{request.observation}}
+			</div>
+		</div>
+	
+				
+						<div class="card">  
+			<div class="item item-text-wrap" ng-repeat="log in request.logs">
+				<small>{{log.log_request}}</small>
+				<p style="color: blue">{{log.user}} {{log.creation}}</p>
+			</div>
+		</div>
+
+
+	</ion-content>
+</ion-view>

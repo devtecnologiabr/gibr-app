@@ -1,0 +1,20 @@
+<ion-view view-title="Atividades" ng-controller="LogController" ng-init="listLog()">
+    <ion-content padding="true" class="has-header">
+        <ion-refresher on-refresh="doRefresh()">
+            <ion-refresher-content></ion-refresher-content>
+        </ion-refresher>
+
+        <div class="card" ng-repeat="log in logs">
+            <div class="item item-divider">
+                <i class="icon ion-calendar"> {{log.creation_date|jsonDate:'dd/MM/yyyy HH:mm:ss'}}</i>
+            </div>
+
+            <div class="item item-text-wrap">
+                    <h3>{{ log.description }}</h3>
+            </div>
+            <div class="item item-divider">
+                    <h3>{{ log.user_id }}</h3>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

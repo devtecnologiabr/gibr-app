@@ -1,0 +1,37 @@
+<ion-view view-title="Dashboard" ng-controller="DashboardController" ng-init="dashboardApp()">
+    <ion-content padding="true" class="has-header">
+        <ion-refresher on-refresh="doRefresh()">
+            <ion-refresher-content></ion-refresher-content>
+        </ion-refresher>
+
+        <div class="card">
+            <div class="item item-text-wrap item-icon-right" style="background-color:goldenrod;">
+                <i class="icon ion-person-stalker" style="color:white;"></i>
+                <h1 style="color:white;">{{dashboard.peoples}}</h1>
+                <h2 style="color:white;">Pessoas</h2>
+            </div>
+        </div>
+        <div class="card">
+                <div class="item item-text-wrap item-icon-right" style="background-color:cadetblue;">
+                    <i class="icon ion-clipboard" style="color:white;"></i>
+                    <h1 style="color:white;">{{dashboard.requests}}</h1>
+                    <h2 style="color:white;">Demandas</h2>
+                </div>
+            </div>
+            <div class="card">
+                    <div class="item item-text-wrap item-icon-right" style="background-color:green;">
+                        <i class="icon ion-coffee" style="color:white;"></i>
+                        <h1 style="color:white;">{{dashboard.birthdays}}</h1>
+                        <h2 style="color:white;">Aniversariantes</h2>
+                    </div>
+                </div>
+
+                <div class="card">
+                        <div class="item item-text-wrap item-icon-right" style="background-color:brown;">
+                            <i class="icon ion-calendar" style="color:white;"></i>
+                            <h1 style="color:white;">{{dashboard.events}}</h1>
+                            <h2 style="color:white;">Compromissos</h2>
+                        </div>
+                    </div>
+    </ion-content>
+</ion-view>

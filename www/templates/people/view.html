@@ -1,0 +1,50 @@
+<ion-view view-title="Perfil" ng-controller="PeopleController" ng-init="findPeople()">
+    <ion-content padding="'true'" class="has-header">
+        <div class="card">
+            <div class="item item-text-wrap item-icon-left">
+                <i class="icon ion-information"></i>
+                <h2>INFORMAÇÕES</h2>
+            </div>
+            <div class="item item-text-wrap item-icon-left">
+                <i class="icon ion-person icon-accessory"></i>
+                <h3>{{data.people.name}}</h3>
+            </div>
+            <div class="item item-text-wrap item-icon-left">
+                <i class="icon ion-home icon-accessory"></i>
+                <h3> {{data.people.address}}, {{data.people.number}} - {{data.people.complement}}, {{data.people.district}} -
+                    {{data.people.city}}, {{data.people.state}}</h3>
+            </div>
+            <div class="item item-text-wrap item-icon-left">
+                <i class="icon ion-egg icon-accessory"></i>
+                <h3>{{data.people.birth_date|date:'d/MM/yyyy'}}</h3>
+            </div>
+            <div class="item item-text-wrap item-icon-left">
+                <i class="icon ion-android-call icon-accessory"></i>
+                <h3>{{data.people.phone_1}} {{data.people.phone_2}}</h3>
+            </div>
+            <div class="item item-text-wrap item-icon-left">
+                <i class="icon ion-email icon-accessory"></i>
+                <h3>{{data.people.email}}</h3>
+            </div>
+        </div>
+        <div class="card">
+            <div class="item item-text-wrap item-icon-left">
+                <i class="icon ion-clipboard"></i>
+                <h2>DEMANDAS ABERTAS</h2>
+            </div>
+            <div class="item" ng-repeat="request in data.requestOpen" ng-click="showRequest(request)">
+                <h2><b>{{request.id}}</b> | {{request.typef}}  - {{request.type}} | {{request.description}}</h2>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="item item-text-wrap item-icon-left">
+                <i class="icon ion-clipboard"></i>
+                <h2>DEMANDAS FECHADAS</h2>
+            </div>
+            <div class="item" ng-repeat="requestc in data.requestClose" ng-click="showRequest(requestc)">
+                <h2><b>{{requestc.id}}</b> | {{requestc.typef}}  - {{requestc.type}} | {{requestc.description}}</h2>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

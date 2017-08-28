@@ -1,0 +1,17 @@
+<ion-view view-title="Demandas" ng-controller="RequestController" ng-init="listRequest()">
+ <ion-nav-buttons side="primary">
+      <a class="button" href="#/tab/request-new">
+        <i class="icon ion-plus icon-accessory"></i>
+      </a>
+    </ion-nav-buttons>
+  <ion-content padding="true" class="has-header">
+    <ion-list>
+       <ion-item class="item-remove-animate item-icon-right" ng-repeat="request in requests" type="item-text-wrap" href="#/tab/request-view/{{request.id}}">
+       <h2>{{request.user}} {{request.bloc}} {{request.apartment}}</h2>
+				<p>{{request.observation}}</p>
+				<i ng-if="request.active == 0" class="icon ion-chevron-right icon-accessory" style="color: red"></i>
+				<i ng-if="request.active == 1" class="icon ion-chevron-right icon-accessory" style="color: green"></i>
+       </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

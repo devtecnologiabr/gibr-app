@@ -1,0 +1,20 @@
+<ion-view view-title="Perfil" ng-controller="UserController" ng-init="findUser()">
+	<ion-content padding="'true'" class="has-header">
+		<div class="card">
+			<div class="item item-text-wrap">
+				{{user.name}}
+			</div>
+			<div class="item item-text-wrap">
+				{{user.bloc}} {{user.apartment}}
+			</div>
+			<div class="item item-text-wrap">
+				{{user.phone_p}} {{user.phone_r}}
+			</div>
+			<div class="item item-text-wrap">
+				{{user.mail}}
+			</div>
+		</div>
+		<div class="spacer" style="height: 40px;"></div>
+      <button  class="button button-stable button-block button-balanced" ng-click="logout()" >Sair</button>
+	</ion-content>
+</ion-view>
