@@ -61,6 +61,16 @@ angular.module('starter.routes', [])
           }
         }
       })
+      .state('tab.people-new', {
+        url: '/people-new',
+        views: {
+          'people': {
+            templateUrl: 'templates/people/new.html',
+            controller: 'PeopleController',
+            resolve: { "check": function ($location) { if (!localStorage.getItem('token')) { $location.path('/login'); } } }
+          }
+        }
+      })
       .state('tab.people-view', {
         url: '/people-view/:id',
         views: {

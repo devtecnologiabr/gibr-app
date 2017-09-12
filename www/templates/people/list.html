@@ -1,6 +1,11 @@
 <ion-view view-title="Pessoas" ng-controller="PeopleController" ng-init="listPeople()">
+    <ion-nav-buttons side="primary">
+        <a class="button" href="#/tab/people-new">
+          <i class="icon ion-plus icon-accessory"></i>
+        </a>
+      </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
-      <ion-refresher on-refresh="doRefresh()">
+      <ion-refresher on-refresh="doRefresh('list')">
           <ion-refresher-content></ion-refresher-content>
         </ion-refresher>
       <ion-header-bar class="bar item-input-inset">

@@ -51,7 +51,7 @@ angular.module('starter.controllers', ['ngCordova'])
                 title: content
               });
 
-              var infoWindowContent =  content;
+              var infoWindowContent = content;
 
               addInfoWindow(marker, infoWindowContent);
             }
@@ -78,19 +78,33 @@ angular.module('starter.controllers', ['ngCordova'])
 
   })
 
-  .controller('PeopleController', function ($scope, $stateParams, $timeout, $ionicPopup, $filter, People, Request) {
+  .controller('PeopleController', function ($scope, $state, $stateParams, $timeout, $ionicPopup, $filter, $window, People, Request, Cep, TypePeople) {
 
-    $scope.doRefresh = function () {
+
+    $scope.doRefresh = function (method) {
       $timeout(function () {
-        $scope.listPeople();
+        if (method == 'list') {
+          $scope.listPeople();
+        } else {
+          $scope.findPeople();
+        }
         $scope.$broadcast('scroll.refreshComplete');
       }, 1000);
+    };
+
+    $scope.getCep = function (model) {
+      Cep.getCep(model.cep).success(function (data) {
+        model.address = data.logradouro;
+        model.district = data.bairro;
+        model.city = data.localidade;
+        model.state = data.uf;
+      });
     };
 
     $scope.showRequest = function (req) {
       Request.log(req.id).success(function (data) {
         var logs = '';
-        for(var i in data){
+        for (var i in data) {
           logs += '<b>' + data[i]['description'] + '</b><br>' + data[i]['user_id'] + ' ' + $filter('jsonDate')(data[i]['creation_date'], 'dd/MM/yyyy HH:mm') + '<br><br>';
         }
         $ionicPopup.alert({
@@ -102,7 +116,7 @@ angular.module('starter.controllers', ['ngCordova'])
           '<b>Descrição:</b> ' + req.description + '<br><br>' +
           '<b>Solução:</b> ' + req.solution + '<br><br>' +
           '<b>Fechado:</b> ' + $filter('jsonDate')(req.solution_date, 'dd/MM/yyyy HH:mm') + '<br>' +
-          '<b>Autor:</b> ' + req.creation_user_id + '<br><br>'+
+          '<b>Autor:</b> ' + req.creation_user_id + '<br><br>' +
           '<b>Logs</b> <br><br>' + logs
         });
       });
@@ -117,6 +131,29 @@ angular.module('starter.controllers', ['ngCordova'])
     $scope.listPeople = function () {
       People.all().success(function (data) {
         $scope.peoples = data;
+      });
+    };
+
+    $scope.listTypePeople = function () {
+      TypePeople.all().success(function (data) {
+        $scope.peopleTypes = data;
+      });
+      People.all().success(function (data) {
+        $scope.contributors = data;
+      });
+    };
+
+    $scope.newPeople = function (model) {
+      People.new(serializeData(model)).success(function (data) {
+        var alertPopup = $ionicPopup.alert({
+          title: 'Salvo com Sucesso',
+          template: data.msg
+        });
+
+        alertPopup.then(function () {
+          $window.location.reload();
+          $state.transitionTo('tab.people', {}, { reload: true });
+        });
       });
     };
   })

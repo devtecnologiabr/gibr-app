@@ -1,0 +1,64 @@
+<ion-view view-title="Cadastrar Pessoa" ng-controller="PeopleController" ng-init="listTypePeople()">
+    <ion-content padding="true" class="has-header">
+        <form class="list" name="people" novalidate>
+            <label class="item item-input item-stacked-label" ng-class="{ 'input-error' : (people.name.$error.required || people.name.$error.minlength) && !people.name.$pristine }">
+                <span class="input-label">Nome</span>
+                <input type="text" name="name" ng-model="model.name" required>
+                <span class="error" ng-show="people.name.$error.required && !people.name.$pristine">Nome é obrigatório</span>
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Nascimento</span>
+                <input type="date" name="birth_date" ng-model="model.birth_date">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">E-mail</span>
+                <input type="email" name="email" ng-model="model.email">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Telefone</span>
+                <input type="phone_1" name="phone_1" ng-model="model.phone_1" />           
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Vínculo</span>                   
+                <select name="contributor_id" id="contributor_id" ng-model="model.contributor_id">
+                    <option ng-repeat="option in contributors" value="{{option.id}}">{{option.name}}</option>
+                </select>
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Categoria</span>                   
+                <select name="type_id" id="type_id" ng-model="model.type_id" required>
+                    <option ng-repeat="option in peopleTypes" value="{{option.id}}">{{option.description}}</option>
+                </select>
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">CEP</span>
+                <input type="text" name="cep" ng-blur="getCep(model)" ng-model="model.cep">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Endereço</span>
+                <input type="text" name="address" ng-model="model.address">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Número</span>
+                <input type="text" name="number" ng-model="model.number">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Complemento</span>
+                <input type="text" name="complement" ng-model="model.complement">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Bairro</span>
+                <input type="text" name="district" ng-model="model.district">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Cidade</span>
+                <input type="text" name="city" ng-model="model.city">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Estado</span>
+                <input type="text" name="state" ng-model="model.state">
+            </label>
+            <button class="button button-positive button-block" ng-click="newPeople(model)" ng-disabled="people.$invalid" onclick="this.disabled=true">Salvar</button>
+        </form>
+    </ion-content>
+</ion-view>

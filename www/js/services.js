@@ -22,16 +22,37 @@ angular.module('starter.services', [])
   })
 
   .factory('Request', function ($http) {
+
+    var data = {};
+
+    data.log = function (id) {
+      return $http.get('http://' + localStorage.getItem('subdomain') + '/api/request-log/' + id + '?token=' + localStorage.getItem('token'));
+    };
+
+    return data;
+  })
+
+  .factory('Cep', function ($http) {
+
+    var data = {};
+
+    data.getCep = function (cep) {
+      return $http.get('https://viacep.com.br/ws/' + cep + '/json/');
+    };
+
+    return data;
+  })
+  .factory('TypePeople', function ($http) {
     
         var data = {};
     
-        data.log = function (id) {
-          return $http.get('http://' + localStorage.getItem('subdomain') + '/api/request-log/' + id + '?token=' + localStorage.getItem('token'));
+        data.all = function () {
+          return $http.get('http://' + localStorage.getItem('subdomain') + '/api/people-type' + '?token=' + localStorage.getItem('token'));
         };
     
         return data;
       })
-  
+
   .factory('People', function ($http) {
 
     var data = {};
@@ -46,6 +67,10 @@ angular.module('starter.services', [])
 
     data.find = function (id) {
       return $http.get('http://' + localStorage.getItem('subdomain') + '/api/people/' + id + '?token=' + localStorage.getItem('token'));
+    };
+
+    data.new = function (model) {
+      return $http.post('http://' + localStorage.getItem('subdomain') + '/api/people-new?token=' + localStorage.getItem('token'), model);
     };
 
     return data;
